@@ -1,19 +1,22 @@
 from flask import Flask, request, jsonify
 import os
 import openai
-from dotenv import load_dotenv
+from flask_cors import CORS
 
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/', methods=['POST'])
 def correct_english():
     text = request.json['text']
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"Correct this to standard English:\n\n{text}",
+        prompt=f"Correct this to standard Spanish:\n\n{text}",
         temperature=0.4,
         max_tokens=1500,
         top_p=1.0,
@@ -37,7 +40,7 @@ if __name__ == '__main__':
 # def correct_english(text):
 #     response = openai.Completion.create(
 #         model="text-davinci-003",
-#         prompt=f"Correct this to standard English:\n\n{text}",
+#         prompt=f"Correct this to standard Spanish:\n\n{text}",
 #         temperature=0.4,
 #         max_tokens=1500,
 #         top_p=1.0,
