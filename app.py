@@ -38,7 +38,7 @@ def correct(text):
 def grade(text):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"Actia como profesor de español. Asigna una calificación al texto (Excelente, Muy bien, Regular, Malo):\n\n{text}",
+        prompt=f"Asigna una calificación al texto (Excelente, Muy bien, Regular, Malo):\n\n{text}",
         temperature=0.4,
         max_tokens=1500,
         top_p=1.0,
