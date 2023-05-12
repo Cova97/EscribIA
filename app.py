@@ -16,12 +16,13 @@ def process():
     data = request.get_json()
     text = data['text']
 
-    corrected_text = correct_spanish(text)
+    corrected_text = correct(text)
     grade_text = grade(text)
+    tips_text  = tips(text)
 
-    return jsonify({'corrected_text': corrected_text, 'grade_text': grade_text})
+    return jsonify({'corrected_text': corrected_text, 'grade_text': grade_text, 'tips_text': tips_text})
 
-def correct_spanish(text):
+def correct(text):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=f"Correct this to standard Spanish:\n\n{text}",
@@ -37,8 +38,8 @@ def correct_spanish(text):
 def grade(text):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"Imagina que eres un evaluador de textos y debes calificar un texto. Basándote en los siguientes aspectos, asigna una calificación (excelente, muy bien, regular, malo) al texto y proporciona una breve justificación para cada calificación:Coherencia y organización: Evalúa si el texto tiene una estructura lógica y coherente, si los párrafos se conectan entre sí y si las ideas se presentan de manera ordenada.Claridad y concisión: Observa si las ideas son expresadas de forma clara y comprensible, evitando ambigüedades y redundancias innecesarias.Desarrollo de argumentos: Analiza si los argumentos presentados son sólidos, relevantes y están respaldados por evidencias convincentes.Uso adecuado del vocabulario: Verifica si el texto utiliza un vocabulario apropiado y variado, evitando repeticiones excesivas y palabras inapropiadas.Ortografía y gramática: Considera si el texto está libre de errores ortográficos y gramaticales, y si se sigue una estructura gramatical correcta.Recuerda justificar cada calificación con base en los aspectos mencionados.:\n\n{text}",
-        temperature=0.5,
+        prompt=f"Actia como profesor de español. Asigna una calificación al texto (Excelente, Muy bien, Regular, Malo):\n\n{text}",
+        temperature=0.4,
         max_tokens=1500,
         top_p=1.0,
         frequency_penalty=0.0,
@@ -46,6 +47,19 @@ def grade(text):
     )
     grade_text = response.choices[0].text.strip()
     return grade_text
+
+def tips(text):
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt=f"Actua como profesor de español, dame consejos de los errores que se encontraron en el texto:\n\n{text}",
+        temperature=0.4,
+        max_tokens=1500,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    )
+    tips_text = response.choices[0].text.strip()
+    return tips_text
 
 if __name__ == '__main__':
     app.run(debug=True)
