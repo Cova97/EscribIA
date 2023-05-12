@@ -28,7 +28,6 @@ def correct(text):
         prompt=f"Correct this to standard Spanish:\n\n{text}",
         temperature=0.5,
         max_tokens=1500,
-        top_p=1.0,
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
@@ -39,9 +38,8 @@ def grade(text):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=f"Asigna una calificación al texto (Excelente, Muy bien, Regular, Malo):\n\n{text}",
-        temperature=0.5,
+        temperature=0.4,
         max_tokens=1500,
-        top_p=1.0,
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
@@ -52,9 +50,8 @@ def tips(text):
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=f"Actua como profesor de español, dame consejos de los errores que se encontraron en el texto:\n\n{text}",
-        temperature=0.5,
+        temperature=0.4,
         max_tokens=1500,
-        top_p=1.0,
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
