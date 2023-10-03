@@ -37,7 +37,7 @@ def correct(text):
 def grade(text):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"Asigna una calificación dependiendo de la ortografia del texto ingresado: (Excelente, Muy bien, Regular, Malo):\n\n{text}",
+        prompt=f"Asigna una calificación de los erroes que se encontraron en el texto: (Excelente, Muy bien, Regular, Malo):\n\n{text}",
         temperature=0.4,
         max_tokens=1500,
         frequency_penalty=0.0,
