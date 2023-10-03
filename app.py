@@ -37,7 +37,7 @@ def correct(text):
 def grade(text):
     response = openai.Completion.create(
         model="text-davinci-003",
-        prompt=f"Asigna una calificación de los erroes que se encontraron en el texto: (Excelente, Muy bien, Regular, Malo):\n\n{text}",
+        prompt=f"Asigna una calificación al texto: Excelente(Escritura impecable, sin errores ortográficos. Uso correcto de la puntuación y la gramática. Vocabulario variado y preciso. Claridad en la comunicación escrita.), Muy bien(Pocos errores ortográficos menores que no afectan significativamente la comprensión. Uso adecuado de la mayoría de las reglas de puntuación y gramática. Vocabulario en su mayoría preciso y apropiado. Comunicación clara y efectiva.), Regular(Algunos errores ortográficos y gramaticales que pueden dificultar la comprensión. Uso inconsistente de la puntuación. Vocabulario básico y limitado. Comunicación con cierta falta de claridad en algunos puntos.) y Malo(Numerosos errores ortográficos y gramaticales que dificultan la comprensión. Puntuación incorrecta o ausente en varios lugares. Uso limitado y deficiente del vocabulario. Comunicación confusa o incoherente.):\n\n{text}",
         temperature=0.4,
         max_tokens=1500,
         frequency_penalty=0.0,
