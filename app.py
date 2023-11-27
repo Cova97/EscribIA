@@ -18,9 +18,9 @@ def process():
 
     corrected_text = correct(text)
     grade_text = grade(text)
-    tips_text  = tips(text)
+    # tips_text  = tips(text)
 
-    return jsonify({'corrected_text': corrected_text, 'grade_text': grade_text, 'tips_text': tips_text})
+    return jsonify({'corrected_text': corrected_text, 'grade_text': grade_text})
 
 def correct(text):
     response = openai.Completion.create(
@@ -46,17 +46,17 @@ def grade(text):
     grade_text = response.choices[0].text.strip()
     return grade_text
 
-def tips(text):
-    response = openai.Completion.create(
-        model="gpt-3.5-turbo",
-        prompt=f"Actua como profesor de español, dame consejos de los errores que se encontraron en el texto:\n\n{text}",
-        temperature=0.4,
-        max_tokens=1500,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
-    )
-    tips_text = response.choices[0].text.strip()
-    return tips_text
+# def tips(text):
+#     response = openai.Completion.create(
+#         model="gpt-3.5-turbo",
+#         prompt=f"Actua como profesor de español, dame consejos de los errores que se encontraron en el texto:\n\n{text}",
+#         temperature=0.4,
+#         max_tokens=1500,
+#         frequency_penalty=0.0,
+#         presence_penalty=0.0
+#     )
+#     tips_text = response.choices[0].text.strip()
+#     return tips_text
 
 if __name__ == '__main__':
     app.run(debug=True)
