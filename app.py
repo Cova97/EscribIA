@@ -24,7 +24,7 @@ def process():
 
 def correct(text):
     response = openai.Completion.create(
-        model="text-davinci-003",
+        model="texto-davinci-003",
         prompt=f"Correct this to standard Spanish:\n\n{text}",
         temperature=0.5,
         max_tokens=4096,
@@ -36,7 +36,7 @@ def correct(text):
 
 def grade(text):
     response = openai.Completion.create(
-        model="text-davinci-003",
+        model="texto-davinci-003",
         prompt=f"Asigna una calificación al texto: Excelente(Escritura impecable, sin errores ortográficos. Uso correcto de la puntuación y la gramática. Vocabulario variado y preciso. Claridad en la comunicación escrita.), Muy bien(Pocos errores ortográficos menores que no afectan significativamente la comprensión. Uso adecuado de la mayoría de las reglas de puntuación y gramática. Vocabulario en su mayoría preciso y apropiado. Comunicación clara y efectiva.), Regular(Algunos errores ortográficos y gramaticales que pueden dificultar la comprensión. Uso inconsistente de la puntuación. Vocabulario básico y limitado. Comunicación con cierta falta de claridad en algunos puntos.) y Malo(Numerosos errores ortográficos y gramaticales que dificultan la comprensión. Puntuación incorrecta o ausente en varios lugares. Uso limitado y deficiente del vocabulario. Comunicación confusa o incoherente.):\n\n{text}",
         temperature=0.4,
         max_tokens=4096,
