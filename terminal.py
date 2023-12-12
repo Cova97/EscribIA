@@ -17,10 +17,10 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Funcion para corregir el texto
 def correct_spanish(text):
     response = openai.Completion.create(
-        model="gpt-3.5-turbo-0613",
+        model="text-davinci-003",
         prompt=f"Correct this to standard Spanish:\n\n{text}",
         temperature=0.5,
-        max_tokens=2500,
+        max_tokens=1500,
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
@@ -30,10 +30,10 @@ def correct_spanish(text):
 # Funcion para calificar el texto
 def score_spanish(text):
     response = openai.Completion.create(
-        model="gpt-3.5-turbo-0613",
-        prompt=f"Califica el texto con la siguinete rubrica(Excelente, Bueno, Regular, Malo){text}",
+        model="text-davinci-003",
+        prompt=f"This is a Spanish text:\n\n{text}\n\nThe score is",
         temperature=0.0,
-        max_tokens=2500,
+        max_tokens=1500,
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
